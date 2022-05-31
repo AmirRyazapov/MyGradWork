@@ -28,53 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.description = new System.Windows.Forms.TextBox();
+            this.author = new System.Windows.Forms.TextBox();
+            this.levelOfImportant = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeStart = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeFinish = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.addEventButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
-            // textBox1
+            // description
             // 
-            this.textBox1.Location = new System.Drawing.Point(364, 244);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 96);
-            this.textBox1.TabIndex = 1;
+            this.description.Location = new System.Drawing.Point(364, 244);
+            this.description.Margin = new System.Windows.Forms.Padding(4);
+            this.description.Multiline = true;
+            this.description.Name = "description";
+            this.description.Size = new System.Drawing.Size(185, 96);
+            this.description.TabIndex = 1;
             // 
-            // textBox2
+            // author
             // 
-            this.textBox2.BackColor = System.Drawing.Color.White;
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(364, 456);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(185, 26);
-            this.textBox2.TabIndex = 2;
+            this.author.BackColor = System.Drawing.Color.White;
+            this.author.Enabled = false;
+            this.author.Location = new System.Drawing.Point(364, 456);
+            this.author.Margin = new System.Windows.Forms.Padding(4);
+            this.author.Name = "author";
+            this.author.ReadOnly = true;
+            this.author.Size = new System.Drawing.Size(185, 26);
+            this.author.TabIndex = 2;
             // 
-            // comboBox1
+            // levelOfImportant
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.levelOfImportant.BackColor = System.Drawing.Color.White;
+            this.levelOfImportant.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.levelOfImportant.FormattingEnabled = true;
+            this.levelOfImportant.Items.AddRange(new object[] {
             "Низкий",
             "Средний",
             "Высокий"});
-            this.comboBox1.Location = new System.Drawing.Point(364, 388);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(185, 26);
-            this.comboBox1.TabIndex = 3;
+            this.levelOfImportant.Location = new System.Drawing.Point(364, 388);
+            this.levelOfImportant.Margin = new System.Windows.Forms.Padding(4);
+            this.levelOfImportant.Name = "levelOfImportant";
+            this.levelOfImportant.Size = new System.Drawing.Size(185, 26);
+            this.levelOfImportant.TabIndex = 3;
             // 
             // label2
             // 
@@ -106,23 +106,23 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Автор";
             // 
-            // dateTimePicker1
+            // dateTimeStart
             // 
-            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(364, 98);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(185, 26);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimeStart.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.dateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeStart.Location = new System.Drawing.Point(364, 98);
+            this.dateTimeStart.Name = "dateTimeStart";
+            this.dateTimeStart.Size = new System.Drawing.Size(185, 26);
+            this.dateTimeStart.TabIndex = 9;
             // 
-            // dateTimePicker2
+            // dateTimeFinish
             // 
-            this.dateTimePicker2.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(364, 167);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(185, 26);
-            this.dateTimePicker2.TabIndex = 10;
+            this.dateTimeFinish.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.dateTimeFinish.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeFinish.Location = new System.Drawing.Point(364, 167);
+            this.dateTimeFinish.Name = "dateTimeFinish";
+            this.dateTimeFinish.Size = new System.Drawing.Size(185, 26);
+            this.dateTimeFinish.TabIndex = 10;
             // 
             // label5
             // 
@@ -144,39 +144,39 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Дата и время окончания события";
             // 
-            // materialRaisedButton1
+            // addEventButton
             // 
-            this.materialRaisedButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.materialRaisedButton1.Depth = 0;
-            this.materialRaisedButton1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialRaisedButton1.Location = new System.Drawing.Point(228, 520);
-            this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton1.Name = "materialRaisedButton1";
-            this.materialRaisedButton1.Primary = true;
-            this.materialRaisedButton1.Size = new System.Drawing.Size(168, 38);
-            this.materialRaisedButton1.TabIndex = 13;
-            this.materialRaisedButton1.Text = "Добавить событие";
-            this.materialRaisedButton1.UseVisualStyleBackColor = true;
-            this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
+            this.addEventButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addEventButton.Depth = 0;
+            this.addEventButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addEventButton.Location = new System.Drawing.Point(228, 520);
+            this.addEventButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.addEventButton.Name = "addEventButton";
+            this.addEventButton.Primary = true;
+            this.addEventButton.Size = new System.Drawing.Size(168, 38);
+            this.addEventButton.TabIndex = 13;
+            this.addEventButton.Text = "Добавить событие";
+            this.addEventButton.UseVisualStyleBackColor = true;
+            this.addEventButton.Click += new System.EventHandler(this.addEventButton_Click);
             // 
             // AddEvent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 597);
-            this.Controls.Add(this.materialRaisedButton1);
+            this.Controls.Add(this.addEventButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTimeFinish);
+            this.Controls.Add(this.dateTimeStart);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.levelOfImportant);
+            this.Controls.Add(this.author);
+            this.Controls.Add(this.description);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddEvent";
             this.Text = "Добавить событие";
             this.ResumeLayout(false);
@@ -185,16 +185,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox description;
+        private System.Windows.Forms.TextBox author;
+        private System.Windows.Forms.ComboBox levelOfImportant;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimeStart;
+        private System.Windows.Forms.DateTimePicker dateTimeFinish;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
+        private MaterialSkin.Controls.MaterialRaisedButton addEventButton;
     }
 }

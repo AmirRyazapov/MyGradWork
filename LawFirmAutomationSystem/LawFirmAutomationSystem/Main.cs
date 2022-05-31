@@ -22,7 +22,7 @@ namespace LawFirmAutomationSystem
         public Main(int lvl, string nm)
         {
             InitializeComponent();
-            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(55, 71, 79);
+            calendar.DefaultCellStyle.SelectionBackColor = Color.FromArgb(55, 71, 79);
             if (lvl == 1)
             {
                 addRecordToolStripMenuItem.Visible = true;
@@ -35,11 +35,11 @@ namespace LawFirmAutomationSystem
                 assignTaskToolStripMenuItem.Visible = true;
             }
             this.MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
-            menuStrip1.Renderer = new ToolStripProfessionalRenderer(new ColorTable());
+            menuStrip.Renderer = new ToolStripProfessionalRenderer(new ColorTable());
             this.level = lvl;
             this.Text = nm;
             name = nm;
-            openFileDialog1.Filter = "Excel files(*.xls;*.xlsx)|*.xls;*.xlsx";
+            openFileDialog.Filter = "Excel files(*.xls;*.xlsx)|*.xls;*.xlsx";
         }
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -47,16 +47,20 @@ namespace LawFirmAutomationSystem
             Application.Exit();
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //нажатия на кнопки, пункты меню, ячейки таблиц и т.д.
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         private void selectFileToolStripMenuItem_Click(object sender, EventArgs e) //не доделано
         {
             string[,] list;
-            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
             {
                 return;
             }
-            string filename = openFileDialog1.FileName;
+            string filename = openFileDialog.FileName;
             Excel.Application ObjWorkExcel = new Excel.Application();
-            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(openFileDialog1.FileName);
+            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(openFileDialog.FileName);
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1];
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);
             int lastColumn = (int)lastCell.Column;
@@ -96,11 +100,11 @@ namespace LawFirmAutomationSystem
             //DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Case>));
         }
 
-        private void coaoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void coaoToolStripMenuItem_Click(object sender, EventArgs e) //парсинг КоАП с сайта consultant.ru
         {
             hiddenControls();
-            dataGridView1.Columns.Clear();
-            dataGridView1.DataSource = null;
+            mainDataGridView.Columns.Clear();
+            mainDataGridView.DataSource = null;
             PleaseWait pleaseWait = new PleaseWait();
             pleaseWait.Show();
             Application.DoEvents();
@@ -141,10 +145,10 @@ namespace LawFirmAutomationSystem
             column4.CellTemplate = new DataGridViewLinkCell();
             column4.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            dataGridView1.Columns.Add(column1);
-            dataGridView1.Columns.Add(column2);
-            dataGridView1.Columns.Add(column3);
-            dataGridView1.Columns.Add(column4);
+            mainDataGridView.Columns.Add(column1);
+            mainDataGridView.Columns.Add(column2);
+            mainDataGridView.Columns.Add(column3);
+            mainDataGridView.Columns.Add(column4);
             string section = "", chapter = "", article = "", url = "";
             foreach (HtmlNode n in node.ChildNodes)
             {
@@ -160,7 +164,7 @@ namespace LawFirmAutomationSystem
                                 url = "http://www.consultant.ru" + hnode.ChildNodes[0].Attributes["href"].Value;
                                 try
                                 {
-                                    dataGridView1.Rows.Add(section, chapter, article, url);
+                                    mainDataGridView.Rows.Add(section, chapter, article, url);
                                 }
                                 catch (Exception ex)
                                 {
@@ -184,12 +188,12 @@ namespace LawFirmAutomationSystem
             }
             pleaseWait.Close();
 
-            dataGridView1.Visible = true;
-            label1.Visible = true;
-            textBox1.Visible = true;
+            mainDataGridView.Visible = true;
+            labelSearch.Visible = true;
+            search.Visible = true;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void mainDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e) //для открытия ссылки на статью КоАП
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
@@ -197,30 +201,30 @@ namespace LawFirmAutomationSystem
             }
             if (e.ColumnIndex == 3 && e.RowIndex >= 0)
             {
-                if (dataGridView1.Columns[e.ColumnIndex].Name != "Содержание")
+                if (mainDataGridView.Columns[e.ColumnIndex].Name != "Содержание")
                 {
                     return;
                 }
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                DataGridViewRow row = mainDataGridView.Rows[e.RowIndex];
                 string url = row.Cells[3].Value.ToString();
                 System.Diagnostics.Process.Start(url);
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void search_TextChanged(object sender, EventArgs e) //поиск по таблице
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            for (int i = 0; i < mainDataGridView.RowCount; i++)
             {
-                dataGridView1.Rows[i].Selected = false;
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                mainDataGridView.Rows[i].Selected = false;
+                for (int j = 0; j < mainDataGridView.Columns.Count; j++)
                 {
-                    if (dataGridView1.Rows[i].Cells[j].Value != null)
+                    if (mainDataGridView.Rows[i].Cells[j].Value != null)
                     {
-                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+                        if (mainDataGridView.Rows[i].Cells[j].Value.ToString().ToLower().Contains(search.Text.ToLower()))
                         {
-                            dataGridView1.Rows[i].Selected = true;
-                            dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[j];
-                            i = dataGridView1.RowCount;
+                            mainDataGridView.Rows[i].Selected = true;
+                            mainDataGridView.CurrentCell = mainDataGridView.Rows[i].Cells[j];
+                            i = mainDataGridView.RowCount;
                             break;
                         }
                     }
@@ -228,129 +232,50 @@ namespace LawFirmAutomationSystem
             }
         }
 
-        private void knowledgeBaseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void knowledgeBaseToolStripMenuItem_Click(object sender, EventArgs e) //вывод базы знаний
         {
             hiddenControls();
-            dataGridView1.Columns.Clear();
+            mainDataGridView.Columns.Clear();
             Client client = new Client();
             DataTable DATA = client.ReadKBFromServer();
             if (DATA == null)
             {
                 return;
             }
-            dataGridView1.DataSource = DATA;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            mainDataGridView.DataSource = DATA;
+            foreach (DataGridViewColumn column in mainDataGridView.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            dataGridView1.Visible = true;
-            label1.Visible = true;
-            textBox1.Visible = true;
+            mainDataGridView.Visible = true;
+            labelSearch.Visible = true;
+            search.Visible = true;
         }
 
-        private void addRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addRecordToolStripMenuItem_Click(object sender, EventArgs e) //добавление записи в базу знаний
         {
             AddRecord addRecord = new AddRecord(name);
             addRecord.Show();
         }
 
-        private void hiddenControls()
-        {
-            Controls.Cast<Control>().ToList().ForEach((ctrl) => ctrl.Visible = false);
-            menuStrip1.Visible = true;
-        }
-
-        private void kalendarOfEventsStripMenuItem_Click(object sender, EventArgs e)
+        private void kalendarOfEventsStripMenuItem_Click(object sender, EventArgs e) //вывод календаря событий
         {
             hiddenControls();
-            splitContainer1.Visible = true;
-            button1.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.BorderSize = 0;
-            splitContainer1.Panel1.BackColor = Color.FromArgb(219, 219, 219);
-            splitContainer1.Panel2.BackColor = Color.FromArgb(219, 219, 219);
+            splitContainer.Visible = true;
+            nextMonth.FlatAppearance.BorderSize = 0;
+            previousMonth.FlatAppearance.BorderSize = 0;
+            splitContainer.Panel1.BackColor = Color.FromArgb(219, 219, 219);
+            splitContainer.Panel2.BackColor = Color.FromArgb(219, 219, 219);
             fillCalendar();
         }
 
-        private void fillCalendar()
-        {
-            dataGridView2.Rows.Clear();
-            dayOfWeek = Convert.ToInt32(firstDayOfMounth.DayOfWeek);
-            label2.Text = firstDayOfMounth.ToString("MMMM", new CultureInfo("ru-RU")) + ", " + firstDayOfMounth.Year.ToString();
-            label2.Font = new Font("Arial", 18);
-            if (dayOfWeek == 0)
-            {
-                dayOfWeek = 6;
-            }
-            else
-            {
-                dayOfWeek--;
-            }
-            dataGridView2.Rows.Add();
-            int numOfRow = 0;
-            dataGridView2.Rows[numOfRow].Height = 60;
-            for (int i = 1; i < daysInMounth + 1; i++)
-            {
-                if (dayOfWeek >= 7)
-                {
-                    dataGridView2.Rows.Add();
-                    numOfRow++;
-                    dataGridView2.Rows[numOfRow].Height = 60;
-                    dayOfWeek = 0;
-                }
-                dataGridView2.Rows[numOfRow].Cells[dayOfWeek].Value = i;
-                if (dayOfWeek >= 5)
-                {
-                    dataGridView2.Rows[numOfRow].Cells[dayOfWeek].Style.BackColor = Color.FromArgb(109, 130, 141);
-                }
-                else
-                {
-                    dataGridView2.Rows[numOfRow].Cells[dayOfWeek].Style.BackColor = Color.FromArgb(181, 191, 196);
-                }
-                dayOfWeek++;
-            }
-            for (int i = 0; i < dataGridView2.Columns.Count; i++)
-            {
-                dataGridView2.Columns[i].HeaderCell.Style.BackColor = Color.FromArgb(55, 71, 79);
-                dataGridView2.Columns[i].HeaderCell.Style.ForeColor = Color.White;
-            }
-            dataGridView2.EnableHeadersVisualStyles = false;
-            foreach (DataGridViewColumn column in dataGridView2.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            dataGridView2.Height = dataGridView2.Rows.GetRowsHeight(DataGridViewElementStates.Visible) + dataGridView2.ColumnHeadersHeight;
-            Client client = new Client();
-            DataTable DATA = client.ReadMonthEventsFromServer(DateTime.ParseExact(label2.Text.Split(',')[0], "MMMM", CultureInfo.CurrentCulture).Month.ToString(), label2.Text.Split(',')[1].Trim());
-            if (DATA == null || DATA.Rows.Count == 0)
-            {
-                return;
-            }
-            else
-            {
-                for (int i = 0; i < DATA.Rows.Count; i++)
-                {
-                    for (int j = 0; j < dataGridView2.Columns.Count; j++)
-                    {
-                        for (int k = 0; k < dataGridView2.Rows.Count; k++)
-                        {
-                            if (dataGridView2.Rows[k].Cells[j].Value != null && Convert.ToInt32(dataGridView2.Rows[k].Cells[j].Value) == Convert.ToInt32(DATA.Rows[i][0].ToString().Split('.')[0]))
-                            {
-                                dataGridView2.Rows[k].Cells[j].Style.BackColor = Color.FromArgb(55, 85, 95);
-                                dataGridView2.Rows[k].Cells[j].Style.ForeColor = Color.White;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void addEventToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addEventToolStripMenuItem_Click(object sender, EventArgs e) //добавление событий в календарь
         {
             AddEvent addEvent = new AddEvent(name);
             addEvent.Show();
         }
 
-        private void exportOfThisTableToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exportOfThisTableToolStripMenuItem_Click(object sender, EventArgs e) //экспорт главной таблицы в excel
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel files(*.xls, *.xlsx)|*.xls,*.xlsx";
@@ -362,30 +287,20 @@ namespace LawFirmAutomationSystem
                 pleaseWait.Show();
                 Application.DoEvents();
                 DataTable table = new DataTable("table");
-                for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                for (int i = 0; i < mainDataGridView.Columns.Count; i++)
                 {
-                    table.Columns.Add(dataGridView1.Columns[i].Name);
+                    table.Columns.Add(mainDataGridView.Columns[i].Name);
                 }
 
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                foreach (DataGridViewRow row in mainDataGridView.Rows)
                 {
                     DataRow datarow = table.NewRow();
-                    for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                    for (int i = 0; i < mainDataGridView.Columns.Count; i++)
                     {
                         datarow[i] = row.Cells[i].Value;
                     }
                     table.Rows.Add(datarow);
                 }
-                ////ClosedXML
-                //XLWorkbook wb = new XLWorkbook();
-                //wb.Worksheets.Add(table, "WorksheetName");
-                ////EPPlus
-                //using (ExcelPackage package = new ExcelPackage(sfd.FileName))
-                //{
-                //    ExcelWorksheet sheet = package.Workbook.Worksheets.Add("Report");
-                //    sheet.Cells["A1"].LoadFromDataTable(table, true);
-                //    package.Save();
-                //}
                 Excel.Application ex = new Excel.Application();
                 ex.SheetsInNewWorkbook = 1;
                 Excel.Workbook workBook = ex.Workbooks.Add();
@@ -449,17 +364,17 @@ namespace LawFirmAutomationSystem
             }
         }
 
-        private void dataGridView1_VisibleChanged(object sender, EventArgs e)
+        private void mainDataGridView_VisibleChanged(object sender, EventArgs e) //отображение кнопки экспорта при видимости главной таблицы
         {
-            exportOfThisTableToolStripMenuItem.Visible = dataGridView1.Visible;
+            exportOfThisTableToolStripMenuItem.Visible = mainDataGridView.Visible;
         }
 
-        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e) //выход из приложения
         {
             Application.Exit();
         }
 
-        private void exitFromAccountToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void exitFromAccountToolStripMenuItem_Click_1(object sender, EventArgs e) //выход из учетной записи
         {
             foreach (Form form in Application.OpenForms)
             {
@@ -469,15 +384,15 @@ namespace LawFirmAutomationSystem
             authorization.Show();
         }
 
-        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void calendar_CellClick(object sender, DataGridViewCellEventArgs e) //вывод задач на день при клике на ячейку календаря
         {
-            splitContainer1.Panel2.Controls.Clear();
-            if (e.RowIndex < 0 || e.ColumnIndex < 0 || dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+            splitContainer.Panel2.Controls.Clear();
+            if (e.RowIndex < 0 || e.ColumnIndex < 0 || calendar.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
             {
                 return;
             }
             Client client = new Client();
-            DataTable DATA = client.ReadEventsFromServer(dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), DateTime.ParseExact(label2.Text.Split(',')[0], "MMMM", CultureInfo.CurrentCulture).Month.ToString(), label2.Text.Split(',')[1].Trim());           
+            DataTable DATA = client.ReadEventsFromServer(calendar.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), DateTime.ParseExact(monthAndYear.Text.Split(',')[0], "MMMM", CultureInfo.CurrentCulture).Month.ToString(), monthAndYear.Text.Split(',')[1].Trim());           
             if (DATA == null)
             {
                 return;
@@ -490,7 +405,7 @@ namespace LawFirmAutomationSystem
                 label.AutoSize = false;
                 label.TextAlign = ContentAlignment.TopCenter;
                 label.Dock = DockStyle.Fill;
-                splitContainer1.Panel2.Controls.Add(label);
+                splitContainer.Panel2.Controls.Add(label);
             }
             else
             {
@@ -500,7 +415,7 @@ namespace LawFirmAutomationSystem
                     TextBox tb = new TextBox();
                     tb.BorderStyle = BorderStyle.FixedSingle;
                     tb.Multiline = true;
-                    tb.Width = splitContainer1.Panel2.Width - 3;
+                    tb.Width = splitContainer.Panel2.Width - 3;
                     string dt1 = DATA.Rows[i][0].ToString().Substring(0, DATA.Rows[i][0].ToString().Length - 3);
                     string dt2 = DATA.Rows[i][1].ToString().Substring(0, DATA.Rows[i][1].ToString().Length - 3);
                     tb.Text = $"Дата и время события: {dt1} - {dt2}\r\nОписание события: {DATA.Rows[i][2]}\r\n" +
@@ -524,12 +439,12 @@ namespace LawFirmAutomationSystem
                     {
                         tb.BackColor = Color.FromArgb(207, 229, 237);
                     }
-                    splitContainer1.Panel2.Controls.Add(tb);
+                    splitContainer.Panel2.Controls.Add(tb);
                 }
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void previousMonth_Click(object sender, EventArgs e) //отображение предыдущего месяца
         {
             if (firstDayOfMounth.Month == 1)
             {
@@ -544,7 +459,7 @@ namespace LawFirmAutomationSystem
             fillCalendar();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void nextMonth_Click(object sender, EventArgs e) //отображение следующего месяца
         {
             if (firstDayOfMounth.Month == 12)
             {
@@ -559,7 +474,7 @@ namespace LawFirmAutomationSystem
             fillCalendar();
         }
 
-        private void myTasksToolStripMenuItem_Click(object sender, EventArgs e)
+        private void myTasksToolStripMenuItem_Click(object sender, EventArgs e) //вывод задач
         {
             foreach (Control cont in this.Controls)
             {
@@ -572,17 +487,100 @@ namespace LawFirmAutomationSystem
             PrintCheckedListBoxAndTasks(name, 0);
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //вспомогательные функции и события, созданные программно
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        private void hiddenControls()
+        {
+            Controls.Cast<Control>().ToList().ForEach((ctrl) => ctrl.Visible = false);
+            menuStrip.Visible = true;
+        }
+
+        private void fillCalendar()
+        {
+            calendar.Rows.Clear();
+            dayOfWeek = Convert.ToInt32(firstDayOfMounth.DayOfWeek);
+            monthAndYear.Text = firstDayOfMounth.ToString("MMMM", new CultureInfo("ru-RU")) + ", " + firstDayOfMounth.Year.ToString();
+            monthAndYear.Font = new Font("Arial", 18);
+            if (dayOfWeek == 0)
+            {
+                dayOfWeek = 6;
+            }
+            else
+            {
+                dayOfWeek--;
+            }
+            calendar.Rows.Add();
+            int numOfRow = 0;
+            calendar.Rows[numOfRow].Height = 60;
+            for (int i = 1; i < daysInMounth + 1; i++)
+            {
+                if (dayOfWeek >= 7)
+                {
+                    calendar.Rows.Add();
+                    numOfRow++;
+                    calendar.Rows[numOfRow].Height = 60;
+                    dayOfWeek = 0;
+                }
+                calendar.Rows[numOfRow].Cells[dayOfWeek].Value = i;
+                if (dayOfWeek >= 5)
+                {
+                    calendar.Rows[numOfRow].Cells[dayOfWeek].Style.BackColor = Color.FromArgb(109, 130, 141);
+                }
+                else
+                {
+                    calendar.Rows[numOfRow].Cells[dayOfWeek].Style.BackColor = Color.FromArgb(181, 191, 196);
+                }
+                dayOfWeek++;
+            }
+            for (int i = 0; i < calendar.Columns.Count; i++)
+            {
+                calendar.Columns[i].HeaderCell.Style.BackColor = Color.FromArgb(55, 71, 79);
+                calendar.Columns[i].HeaderCell.Style.ForeColor = Color.White;
+            }
+            calendar.EnableHeadersVisualStyles = false;
+            foreach (DataGridViewColumn column in calendar.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            calendar.Height = calendar.Rows.GetRowsHeight(DataGridViewElementStates.Visible) + calendar.ColumnHeadersHeight;
+            Client client = new Client();
+            DataTable DATA = client.ReadMonthEventsFromServer(DateTime.ParseExact(monthAndYear.Text.Split(',')[0], "MMMM", CultureInfo.CurrentCulture).Month.ToString(), monthAndYear.Text.Split(',')[1].Trim());
+            if (DATA == null || DATA.Rows.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < DATA.Rows.Count; i++)
+                {
+                    for (int j = 0; j < calendar.Columns.Count; j++)
+                    {
+                        for (int k = 0; k < calendar.Rows.Count; k++)
+                        {
+                            if (calendar.Rows[k].Cells[j].Value != null && Convert.ToInt32(calendar.Rows[k].Cells[j].Value) == Convert.ToInt32(DATA.Rows[i][0].ToString().Split('.')[0]))
+                            {
+                                calendar.Rows[k].Cells[j].Style.BackColor = Color.FromArgb(55, 85, 95);
+                                calendar.Rows[k].Cells[j].Style.ForeColor = Color.White;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void PrintCheckedListBoxAndTasks(string name, int shift)
         {
             hiddenControls();
-            dataGridView1.Columns.Clear();
+            mainDataGridView.Columns.Clear();
             Client client = new Client();
             DataTable DATA = client.ReadTasksFromServer(name);
             if (DATA == null)
             {
                 return;
             }
-            dataGridView1.DataSource = DATA;
+            mainDataGridView.DataSource = DATA;
             checkedListBox = new CheckedListBox();
             checkedListBox.Items.Add("В работе");
             checkedListBox.Items.Add("Выполнены");
@@ -631,14 +629,14 @@ namespace LawFirmAutomationSystem
         private void GetTasks(List<string> checkedItems, int shift)
         {
             List<DataGridViewRow> tasks = new List<DataGridViewRow>();
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            for (int i = 0; i < mainDataGridView.Rows.Count; i++)
             {
                 bool b = true;
                 foreach (string item in checkedItems)
                 {
                     if (item == "В работе")
                     {
-                        if (dataGridView1.Rows[i].Cells[5].Value.ToString() != item)
+                        if (mainDataGridView.Rows[i].Cells[5].Value.ToString() != item)
                         {
                             b = false;
                             break;
@@ -646,7 +644,7 @@ namespace LawFirmAutomationSystem
                     }
                     if (item == "Выполнены")
                     {
-                        if (dataGridView1.Rows[i].Cells[5].Value.ToString() != "Выполнена")
+                        if (mainDataGridView.Rows[i].Cells[5].Value.ToString() != "Выполнена")
                         {
                             b = false;
                             break;
@@ -654,9 +652,9 @@ namespace LawFirmAutomationSystem
                     }
                     if (item == "Этот день")
                     {
-                        if (!(Convert.ToDateTime(dataGridView1.Rows[i].Cells[2].Value).Year == DateTime.Now.Year
-                        && Convert.ToDateTime(dataGridView1.Rows[i].Cells[2].Value).Month == DateTime.Now.Month
-                        && Convert.ToDateTime(dataGridView1.Rows[i].Cells[2].Value).Day == DateTime.Now.Day))
+                        if (!(Convert.ToDateTime(mainDataGridView.Rows[i].Cells[2].Value).Year == DateTime.Now.Year
+                        && Convert.ToDateTime(mainDataGridView.Rows[i].Cells[2].Value).Month == DateTime.Now.Month
+                        && Convert.ToDateTime(mainDataGridView.Rows[i].Cells[2].Value).Day == DateTime.Now.Day))
                         {
                             b = false;
                             break;
@@ -665,7 +663,7 @@ namespace LawFirmAutomationSystem
                     if (item == "Эта неделя")
                     {
                         GregorianCalendar cal = new GregorianCalendar();
-                        int weekNumberOfTask = cal.GetWeekOfYear(Convert.ToDateTime(dataGridView1.Rows[i].Cells[2].Value), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+                        int weekNumberOfTask = cal.GetWeekOfYear(Convert.ToDateTime(mainDataGridView.Rows[i].Cells[2].Value), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                         int weekNumberNow = cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                         if (weekNumberOfTask != weekNumberNow)
                         {
@@ -675,8 +673,8 @@ namespace LawFirmAutomationSystem
                     }
                     if (item == "Этот месяц")
                     {
-                        if (!(Convert.ToDateTime(dataGridView1.Rows[i].Cells[2].Value).Year == DateTime.Now.Year
-                        && Convert.ToDateTime(dataGridView1.Rows[i].Cells[2].Value).Month == DateTime.Now.Month))
+                        if (!(Convert.ToDateTime(mainDataGridView.Rows[i].Cells[2].Value).Year == DateTime.Now.Year
+                        && Convert.ToDateTime(mainDataGridView.Rows[i].Cells[2].Value).Month == DateTime.Now.Month))
                         {
                             b = false;
                             break;
@@ -685,7 +683,7 @@ namespace LawFirmAutomationSystem
                 }
                 if (b)
                 {
-                    tasks.Add(dataGridView1.Rows[i]);
+                    tasks.Add(mainDataGridView.Rows[i]);
                 }
             }
             PrintTask(tasks, shift);
@@ -765,11 +763,11 @@ namespace LawFirmAutomationSystem
                 button.ForeColor = Color.White;
                 button.AutoSize = true;
                 button.Font = new Font("Arial", 18);
-                button.Cursor = System.Windows.Forms.Cursors.Hand;
+                button.Cursor = Cursors.Hand;
                 button.FlatAppearance.BorderSize = 0;
                 button.FlatStyle = FlatStyle.Flat;
                 button.Name = task.Cells[0].Value.ToString();
-                button.Click += button_Click;
+                button.Click += taskButton_Click;
                 if (but)
                 {
                     background.Controls.Add(button);
@@ -800,7 +798,7 @@ namespace LawFirmAutomationSystem
             this.Controls.Add(background);
         }
 
-        private void button_Click(object sender, EventArgs e)
+        private void taskButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             Client client = new Client();
@@ -813,7 +811,8 @@ namespace LawFirmAutomationSystem
             {
                 process = "В работе";
             }
-            string ans = client.UpdateTask(button.Name, process);
+            string query = $"id={Uri.EscapeDataString(button.Name)}&process={Uri.EscapeDataString(process)}";
+            string ans = client.UpdateTask(query);
             myTasksToolStripMenuItem_Click(null, null);
             MessageBox.Show(ans);
         }
@@ -840,7 +839,7 @@ namespace LawFirmAutomationSystem
             comboBox.Location = new Point(20, 120);
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox.FlatStyle = FlatStyle.Flat;
-            comboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            comboBox.Cursor = Cursors.Hand;
 
             Client client = new Client();
             DataTable DATA = client.GetListOfWorkers(level);

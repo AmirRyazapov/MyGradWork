@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace LawFirmAutomationSystem
@@ -29,15 +24,7 @@ namespace LawFirmAutomationSystem
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             Color textColor = this.GetItemCheckState(e.Index) == CheckState.Unchecked ? UncheckedColor : (this.GetItemCheckState(e.Index) == CheckState.Checked ? CheckedColor : Color.White);
-            DrawItemEventArgs e2 = new DrawItemEventArgs
-           (e.Graphics,
-            e.Font,
-            new Rectangle(e.Bounds.Location, e.Bounds.Size),
-            e.Index,
-            (e.State & DrawItemState.Focus) == DrawItemState.Focus ? DrawItemState.Focus : DrawItemState.None,
-            textColor,
-            this.BackColor);
-
+            DrawItemEventArgs e2 = new DrawItemEventArgs(e.Graphics, e.Font, new Rectangle(e.Bounds.Location, e.Bounds.Size), e.Index, (e.State & DrawItemState.Focus) == DrawItemState.Focus ? DrawItemState.Focus : DrawItemState.None, textColor, this.BackColor);
             base.OnDrawItem(e2);
         }
     }

@@ -1,11 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace LawAutomationServer
@@ -25,16 +22,13 @@ namespace LawAutomationServer
             {
                 db.openConnection();
                 MySqlCommand command = new MySqlCommand("INSERT INTO events (datetime_start, datetime_finish, text, level, id_author) " +
-                    $"VALUES (?datetimestart, ?datetimefinish, ?text, ?level, (SELECT id_user FROM users WHERE login = ?idauthor))", db.getConnection());
-                
+                    $"VALUES (?datetimestart, ?datetimefinish, ?text, ?level, (SELECT id_user FROM users WHERE login = ?idauthor))", db.getConnection());              
                 command.Parameters.AddWithValue("?datetimestart", datetimestart);
                 command.Parameters.AddWithValue("?datetimefinish", datetimefinish);
                 command.Parameters.AddWithValue("?text", text);
                 command.Parameters.AddWithValue("?level", level);
                 command.Parameters.AddWithValue("?idauthor", idauthor);
-
                 command.ExecuteNonQuery();
-                db.closeConnection();
                 return "Запись успешно добавлена!";
             }
             catch (Exception ex)
@@ -62,15 +56,12 @@ namespace LawAutomationServer
                 MySqlCommand command = new MySqlCommand("INSERT INTO tasks (datetime_appointment, datetime_finish, text, id_author, id_subordinate, process) " +
                     "VALUES (?datetimeappointment, ?datetimefinish, ?text, (SELECT id_user FROM users WHERE login = ?author), " +
                     "(SELECT id_user FROM users WHERE login = ?subordinate), 'В работе')", db.getConnection());
-
                 command.Parameters.AddWithValue("?author", author);
                 command.Parameters.AddWithValue("?datetimeappointment", datetimeappointment);
                 command.Parameters.AddWithValue("?datetimefinish", datetimefinish);
                 command.Parameters.AddWithValue("?text", text);
                 command.Parameters.AddWithValue("?subordinate", subordinate);
-
                 command.ExecuteNonQuery();
-                db.closeConnection();
                 return "Запись успешно добавлена!";
             }
             catch (Exception ex)
@@ -96,14 +87,11 @@ namespace LawAutomationServer
                 db.openConnection();
                 MySqlCommand command = new MySqlCommand("INSERT INTO knowledgebase (question, answer, date, id_author) " +
                     "VALUES (?question, ?answer, ?date, (SELECT id_user FROM users WHERE login = ?author))", db.getConnection());
-
                 command.Parameters.AddWithValue("?question", question);
                 command.Parameters.AddWithValue("?answer", answer);
                 command.Parameters.AddWithValue("?date", date);
                 command.Parameters.AddWithValue("?author", author);
-
                 command.ExecuteNonQuery();
-                db.closeConnection();
                 return "Запись успешно добавлена!";
             }
             catch (Exception ex)
@@ -125,13 +113,10 @@ namespace LawAutomationServer
             try
             {
                 db.openConnection();
-                MySqlCommand command = new MySqlCommand("UPDATE tasks SET process = ?process " +
-                    "WHERE id_task = ?id", db.getConnection());
-
+                MySqlCommand command = new MySqlCommand("UPDATE tasks SET process = ?process WHERE id_task = ?id", db.getConnection());
                 command.Parameters.AddWithValue("?id", id);
                 command.Parameters.AddWithValue("?process", process);
                 command.ExecuteNonQuery();
-                db.closeConnection();
                 return "Запись успешно изменена!";
             }
             catch (Exception ex)
@@ -144,10 +129,10 @@ namespace LawAutomationServer
             }
         }
 
-        public DataTable ReadFromDB(string query)
+        public DataTable ReadKBFromDB()
         {
-            var utf8 = Encoding.GetEncoding("utf-8");
-            query = HttpUtility.UrlDecode(query, utf8);
+            string query = $"SELECT id_question AS 'ID вопроса', question AS 'Вопрос', answer AS 'Ответ', date AS 'Дата'," +
+                    $" (SELECT login FROM users WHERE id_user = id_author) AS 'Автор' FROM knowledgebase";
             DBConnection db = new DBConnection();
             MySqlDataAdapter SDA;
             DataTable DATA = new DataTable();
@@ -156,11 +141,10 @@ namespace LawAutomationServer
                 db.openConnection();
                 SDA = new MySqlDataAdapter(query, db.getConnection());
                 SDA.Fill(DATA);
-                return DATA;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                return null;
             }
             finally
             {
@@ -187,13 +171,11 @@ namespace LawAutomationServer
                 command.Parameters.AddWithValue("?day", day);
                 command.Parameters.AddWithValue("?month", month);
                 command.Parameters.AddWithValue("?year", year);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                DATA.Load(dataReader);
-                return DATA;
+                DATA = GetAnswer(command);
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                return null;
             }
             finally
             {
@@ -216,13 +198,11 @@ namespace LawAutomationServer
                     "YEAR(datetime_start) = ?year AND MONTH(datetime_start) = ?month ORDER BY datetime_start", db.getConnection());
                 command.Parameters.AddWithValue("?month", month);
                 command.Parameters.AddWithValue("?year", year);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                DATA.Load(dataReader);
-                return DATA;
+                DATA = GetAnswer(command);
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                return null;
             }
             finally
             {
@@ -245,13 +225,11 @@ namespace LawAutomationServer
                     "AS 'Задачу назначил', process AS 'Статус задачи' FROM tasks WHERE id_subordinate = (SELECT id_user FROM users WHERE login = ?name) " +
                     "ORDER BY datetime_finish", db.getConnection());
                 command.Parameters.AddWithValue("?name", name);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                DATA.Load(dataReader);
-                return DATA;
+                DATA = GetAnswer(command);
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                return null;
             }
             finally
             {
@@ -271,42 +249,17 @@ namespace LawAutomationServer
                 db.openConnection();
                 MySqlCommand command = new MySqlCommand("SELECT login FROM users WHERE type > ?level", db.getConnection());
                 command.Parameters.AddWithValue("?level", level);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                DATA.Load(dataReader);
-                return DATA;
+                DATA = GetAnswer(command);
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                return null;
             }
             finally
             {
                 db.closeConnection();
             }
             return DATA;
-        }
-
-        public string GetHashPassword(string password)
-        {
-            byte[] pw = Encoding.UTF8.GetBytes(password);
-            byte[] salt = Encoding.UTF8.GetBytes("lawfirmpassword");
-            byte[] hashPw = GenerateHashWithSalt(pw, salt);
-            return Convert.ToBase64String(hashPw);
-        }
-
-        static byte[] GenerateHashWithSalt(byte[] password, byte[] salt)
-        {
-            HashAlgorithm ha = new SHA256Managed();
-            byte[] passwordWithSaltBytes = new byte[password.Length + salt.Length];
-            for (int i = 0; i < password.Length; i++)
-            {
-                passwordWithSaltBytes[i] = password[i];
-            }
-            for (int i = 0; i < salt.Length; i++)
-            {
-                passwordWithSaltBytes[password.Length + i] = salt[i];
-            }
-            return ha.ComputeHash(passwordWithSaltBytes);
         }
 
         public DataTable Auth(string login, string password)
@@ -346,6 +299,29 @@ namespace LawAutomationServer
                 Console.WriteLine(ex.Message);
             }
             return DATA;
+        }
+
+        public string GetHashPassword(string password)
+        {
+            byte[] pw = Encoding.UTF8.GetBytes(password);
+            byte[] salt = Encoding.UTF8.GetBytes("lawfirmpassword");
+            byte[] hashPw = GenerateHashWithSalt(pw, salt);
+            return Convert.ToBase64String(hashPw);
+        }
+
+        static byte[] GenerateHashWithSalt(byte[] password, byte[] salt)
+        {
+            HashAlgorithm ha = new SHA256Managed();
+            byte[] passwordWithSaltBytes = new byte[password.Length + salt.Length];
+            for (int i = 0; i < password.Length; i++)
+            {
+                passwordWithSaltBytes[i] = password[i];
+            }
+            for (int i = 0; i < salt.Length; i++)
+            {
+                passwordWithSaltBytes[password.Length + i] = salt[i];
+            }
+            return ha.ComputeHash(passwordWithSaltBytes);
         }
     }
 }

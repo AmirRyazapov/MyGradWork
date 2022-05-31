@@ -30,31 +30,32 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.работаСФайламиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.workingWithFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportOfThisTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.составитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.дополнительнаяИнформацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeAReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.additionalInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.knowledgeBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kalendarOfEventsStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.задачиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.myTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assignTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tasksWorkersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitFromAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.mainDataGridView = new System.Windows.Forms.DataGridView();
+            this.search = new System.Windows.Forms.TextBox();
+            this.labelSearch = new System.Windows.Forms.Label();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.previousMonth = new System.Windows.Forms.Button();
+            this.nextMonth = new System.Windows.Forms.Button();
+            this.monthAndYear = new System.Windows.Forms.Label();
+            this.calendar = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,47 +63,46 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tasksWorkersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.calendar)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.menuStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.работаСФайламиToolStripMenuItem,
-            this.составитьОтчетToolStripMenuItem,
-            this.дополнительнаяИнформацияToolStripMenuItem,
+            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.workingWithFilesToolStripMenuItem,
+            this.makeAReportToolStripMenuItem,
+            this.additionalInformationToolStripMenuItem,
             this.kalendarOfEventsStripMenuItem,
-            this.задачиToolStripMenuItem,
+            this.tasksToolStripMenuItem,
             this.exitFromAccountToolStripMenuItem,
             this.exitToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 64);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1145, 28);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 64);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.menuStrip.Size = new System.Drawing.Size(1145, 28);
+            this.menuStrip.TabIndex = 3;
+            this.menuStrip.Text = "menuStrip1";
             // 
-            // работаСФайламиToolStripMenuItem
+            // workingWithFilesToolStripMenuItem
             // 
-            this.работаСФайламиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.workingWithFilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectFileToolStripMenuItem,
             this.exportOfThisTableToolStripMenuItem});
-            this.работаСФайламиToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.работаСФайламиToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.работаСФайламиToolStripMenuItem.Name = "работаСФайламиToolStripMenuItem";
-            this.работаСФайламиToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.работаСФайламиToolStripMenuItem.Text = "Работа с файлами";
+            this.workingWithFilesToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.workingWithFilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.workingWithFilesToolStripMenuItem.Name = "workingWithFilesToolStripMenuItem";
+            this.workingWithFilesToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.workingWithFilesToolStripMenuItem.Text = "Работа с файлами";
             // 
             // selectFileToolStripMenuItem
             // 
@@ -124,29 +124,29 @@
             this.exportOfThisTableToolStripMenuItem.Visible = false;
             this.exportOfThisTableToolStripMenuItem.Click += new System.EventHandler(this.exportOfThisTableToolStripMenuItem_Click);
             // 
-            // составитьОтчетToolStripMenuItem
+            // makeAReportToolStripMenuItem
             // 
-            this.составитьОтчетToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.составитьОтчетToolStripMenuItem.Name = "составитьОтчетToolStripMenuItem";
-            this.составитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.составитьОтчетToolStripMenuItem.Text = "Составить отчет";
+            this.makeAReportToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.makeAReportToolStripMenuItem.Name = "makeAReportToolStripMenuItem";
+            this.makeAReportToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.makeAReportToolStripMenuItem.Text = "Составить отчет";
             // 
-            // дополнительнаяИнформацияToolStripMenuItem
+            // additionalInformationToolStripMenuItem
             // 
-            this.дополнительнаяИнформацияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.additionalInformationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.coaoToolStripMenuItem,
             this.knowledgeBaseToolStripMenuItem});
-            this.дополнительнаяИнформацияToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.дополнительнаяИнформацияToolStripMenuItem.Name = "дополнительнаяИнформацияToolStripMenuItem";
-            this.дополнительнаяИнформацияToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.дополнительнаяИнформацияToolStripMenuItem.Text = "Дополнительная информация";
+            this.additionalInformationToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.additionalInformationToolStripMenuItem.Name = "additionalInformationToolStripMenuItem";
+            this.additionalInformationToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.additionalInformationToolStripMenuItem.Text = "Дополнительная информация";
             // 
             // coaoToolStripMenuItem
             // 
             this.coaoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.coaoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.coaoToolStripMenuItem.Name = "coaoToolStripMenuItem";
-            this.coaoToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.coaoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.coaoToolStripMenuItem.Text = "КОАП";
             this.coaoToolStripMenuItem.Click += new System.EventHandler(this.coaoToolStripMenuItem_Click);
             // 
@@ -157,7 +157,7 @@
             this.addRecordToolStripMenuItem});
             this.knowledgeBaseToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.knowledgeBaseToolStripMenuItem.Name = "knowledgeBaseToolStripMenuItem";
-            this.knowledgeBaseToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.knowledgeBaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.knowledgeBaseToolStripMenuItem.Text = "База знаний";
             this.knowledgeBaseToolStripMenuItem.Click += new System.EventHandler(this.knowledgeBaseToolStripMenuItem_Click);
             // 
@@ -191,16 +191,16 @@
             this.addEventToolStripMenuItem.Visible = false;
             this.addEventToolStripMenuItem.Click += new System.EventHandler(this.addEventToolStripMenuItem_Click);
             // 
-            // задачиToolStripMenuItem
+            // tasksToolStripMenuItem
             // 
-            this.задачиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tasksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.myTasksToolStripMenuItem,
             this.assignTaskToolStripMenuItem,
             this.tasksWorkersToolStripMenuItem});
-            this.задачиToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.задачиToolStripMenuItem.Name = "задачиToolStripMenuItem";
-            this.задачиToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
-            this.задачиToolStripMenuItem.Text = "Задачи";
+            this.tasksToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.tasksToolStripMenuItem.Name = "tasksToolStripMenuItem";
+            this.tasksToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
+            this.tasksToolStripMenuItem.Text = "Задачи";
             // 
             // myTasksToolStripMenuItem
             // 
@@ -221,6 +221,16 @@
             this.assignTaskToolStripMenuItem.Visible = false;
             this.assignTaskToolStripMenuItem.Click += new System.EventHandler(this.assignTaskToolStripMenuItem_Click);
             // 
+            // tasksWorkersToolStripMenuItem
+            // 
+            this.tasksWorkersToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.tasksWorkersToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.tasksWorkersToolStripMenuItem.Name = "tasksWorkersToolStripMenuItem";
+            this.tasksWorkersToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.tasksWorkersToolStripMenuItem.Text = "Задачи сотрудников";
+            this.tasksWorkersToolStripMenuItem.Visible = false;
+            this.tasksWorkersToolStripMenuItem.Click += new System.EventHandler(this.tasksWorkersToolStripMenuItem_Click);
+            // 
             // exitFromAccountToolStripMenuItem
             // 
             this.exitFromAccountToolStripMenuItem.ForeColor = System.Drawing.Color.White;
@@ -237,20 +247,20 @@
             this.exitToolStripMenuItem.Text = "Выйти из приложения";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
-            // dataGridView1
+            // mainDataGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.mainDataGridView.AllowUserToAddRows = false;
+            this.mainDataGridView.AllowUserToDeleteRows = false;
+            this.mainDataGridView.AllowUserToResizeColumns = false;
+            this.mainDataGridView.AllowUserToResizeRows = false;
+            this.mainDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mainDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.mainDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.mainDataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.mainDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -258,127 +268,127 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.GridColor = System.Drawing.Color.Black;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 103);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
+            this.mainDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.mainDataGridView.GridColor = System.Drawing.Color.Black;
+            this.mainDataGridView.Location = new System.Drawing.Point(0, 103);
+            this.mainDataGridView.Name = "mainDataGridView";
+            this.mainDataGridView.ReadOnly = true;
+            this.mainDataGridView.RowHeadersVisible = false;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Size = new System.Drawing.Size(1200, 521);
-            this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.Visible = false;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.VisibleChanged += new System.EventHandler(this.dataGridView1_VisibleChanged);
+            this.mainDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.mainDataGridView.Size = new System.Drawing.Size(1200, 521);
+            this.mainDataGridView.TabIndex = 4;
+            this.mainDataGridView.Visible = false;
+            this.mainDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mainDataGridView_CellContentClick);
+            this.mainDataGridView.VisibleChanged += new System.EventHandler(this.mainDataGridView_VisibleChanged);
             // 
-            // textBox1
+            // search
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(145, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(327, 19);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Visible = false;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.search.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.search.Location = new System.Drawing.Point(145, 0);
+            this.search.Name = "search";
+            this.search.Size = new System.Drawing.Size(327, 19);
+            this.search.TabIndex = 5;
+            this.search.Visible = false;
+            this.search.TextChanged += new System.EventHandler(this.search_TextChanged);
             // 
-            // label1
+            // labelSearch
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 19);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Поиск по таблице";
-            this.label1.Visible = false;
+            this.labelSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            this.labelSearch.ForeColor = System.Drawing.Color.White;
+            this.labelSearch.Location = new System.Drawing.Point(0, 0);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(139, 19);
+            this.labelSearch.TabIndex = 6;
+            this.labelSearch.Text = "Поиск по таблице";
+            this.labelSearch.Visible = false;
             // 
-            // splitContainer1
+            // splitContainer
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 95);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer.BackColor = System.Drawing.Color.White;
+            this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer.IsSplitterFixed = true;
+            this.splitContainer.Location = new System.Drawing.Point(0, 95);
+            this.splitContainer.Name = "splitContainer";
             // 
-            // splitContainer1.Panel1
+            // splitContainer.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView2);
-            this.splitContainer1.Panel1MinSize = 600;
+            this.splitContainer.Panel1.Controls.Add(this.previousMonth);
+            this.splitContainer.Panel1.Controls.Add(this.nextMonth);
+            this.splitContainer.Panel1.Controls.Add(this.monthAndYear);
+            this.splitContainer.Panel1.Controls.Add(this.calendar);
+            this.splitContainer.Panel1MinSize = 600;
             // 
-            // splitContainer1.Panel2
+            // splitContainer.Panel2
             // 
-            this.splitContainer1.Panel2.AutoScroll = true;
-            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.Panel2MinSize = 400;
-            this.splitContainer1.Size = new System.Drawing.Size(1200, 529);
-            this.splitContainer1.SplitterDistance = 600;
-            this.splitContainer1.TabIndex = 7;
-            this.splitContainer1.Visible = false;
+            this.splitContainer.Panel2.AutoScroll = true;
+            this.splitContainer.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainer.Panel2MinSize = 400;
+            this.splitContainer.Size = new System.Drawing.Size(1200, 529);
+            this.splitContainer.SplitterDistance = 600;
+            this.splitContainer.TabIndex = 7;
+            this.splitContainer.Visible = false;
             // 
-            // button2
+            // previousMonth
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(135, 46);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Предыдущий месяц";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.previousMonth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.previousMonth.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.previousMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.previousMonth.ForeColor = System.Drawing.Color.White;
+            this.previousMonth.Location = new System.Drawing.Point(0, 0);
+            this.previousMonth.Margin = new System.Windows.Forms.Padding(0);
+            this.previousMonth.Name = "previousMonth";
+            this.previousMonth.Size = new System.Drawing.Size(135, 46);
+            this.previousMonth.TabIndex = 5;
+            this.previousMonth.Text = "Предыдущий месяц";
+            this.previousMonth.UseVisualStyleBackColor = false;
+            this.previousMonth.Click += new System.EventHandler(this.previousMonth_Click);
             // 
-            // button1
+            // nextMonth
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(463, -1);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(135, 46);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Следующий месяц";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.nextMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextMonth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.nextMonth.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.nextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.nextMonth.ForeColor = System.Drawing.Color.White;
+            this.nextMonth.Location = new System.Drawing.Point(463, -1);
+            this.nextMonth.Margin = new System.Windows.Forms.Padding(0);
+            this.nextMonth.Name = "nextMonth";
+            this.nextMonth.Size = new System.Drawing.Size(135, 46);
+            this.nextMonth.TabIndex = 4;
+            this.nextMonth.Text = "Следующий месяц";
+            this.nextMonth.UseVisualStyleBackColor = false;
+            this.nextMonth.Click += new System.EventHandler(this.nextMonth_Click);
             // 
-            // label2
+            // monthAndYear
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.monthAndYear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(368, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 18);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
+            this.monthAndYear.AutoSize = true;
+            this.monthAndYear.Location = new System.Drawing.Point(368, 13);
+            this.monthAndYear.Name = "monthAndYear";
+            this.monthAndYear.Size = new System.Drawing.Size(50, 18);
+            this.monthAndYear.TabIndex = 3;
+            this.monthAndYear.Text = "label2";
             // 
-            // dataGridView2
+            // calendar
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.calendar.AllowUserToAddRows = false;
+            this.calendar.AllowUserToDeleteRows = false;
+            this.calendar.AllowUserToResizeColumns = false;
+            this.calendar.AllowUserToResizeRows = false;
+            this.calendar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView2.ColumnHeadersHeight = 36;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.calendar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.calendar.BackgroundColor = System.Drawing.Color.White;
+            this.calendar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.calendar.ColumnHeadersHeight = 36;
+            this.calendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.calendar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
@@ -386,14 +396,14 @@
             this.Column5,
             this.Column6,
             this.Column7});
-            this.dataGridView2.GridColor = System.Drawing.Color.Black;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 50);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(598, 478);
-            this.dataGridView2.TabIndex = 0;
-            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.calendar.GridColor = System.Drawing.Color.Black;
+            this.calendar.Location = new System.Drawing.Point(0, 50);
+            this.calendar.Name = "calendar";
+            this.calendar.ReadOnly = true;
+            this.calendar.RowHeadersVisible = false;
+            this.calendar.Size = new System.Drawing.Size(598, 478);
+            this.calendar.TabIndex = 0;
+            this.calendar.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.calendar_CellClick);
             // 
             // Column1
             // 
@@ -437,64 +447,54 @@
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
             // 
-            // tasksWorkersToolStripMenuItem
-            // 
-            this.tasksWorkersToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.tasksWorkersToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.tasksWorkersToolStripMenuItem.Name = "tasksWorkersToolStripMenuItem";
-            this.tasksWorkersToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.tasksWorkersToolStripMenuItem.Text = "Задачи сотрудников";
-            this.tasksWorkersToolStripMenuItem.Visible = false;
-            this.tasksWorkersToolStripMenuItem.Click += new System.EventHandler(this.tasksWorkersToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 624);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.labelSearch);
+            this.Controls.Add(this.search);
+            this.Controls.Add(this.mainDataGridView);
+            this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main";
             this.Text = "Main";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).EndInit();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.calendar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem работаСФайламиToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem workingWithFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem составитьОтчетToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem makeAReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitFromAccountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem дополнительнаяИнформацияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem additionalInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem coaoToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView mainDataGridView;
+        private System.Windows.Forms.TextBox search;
+        private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.ToolStripMenuItem knowledgeBaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kalendarOfEventsStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addEventToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.DataGridView calendar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -502,12 +502,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label monthAndYear;
         private System.Windows.Forms.ToolStripMenuItem exportOfThisTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolStripMenuItem задачиToolStripMenuItem;
+        private System.Windows.Forms.Button previousMonth;
+        private System.Windows.Forms.Button nextMonth;
+        private System.Windows.Forms.ToolStripMenuItem tasksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem myTasksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem assignTaskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tasksWorkersToolStripMenuItem;

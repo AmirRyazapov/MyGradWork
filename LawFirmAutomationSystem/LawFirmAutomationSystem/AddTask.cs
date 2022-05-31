@@ -1,12 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LawFirmAutomationSystem
@@ -16,32 +10,34 @@ namespace LawFirmAutomationSystem
         public AddTask(string author, int level)
         {
             InitializeComponent();
-            textBox1.Text = author;
+            this.author.Text = author;
             Client client = new Client();
             DataTable DATA = client.GetListOfWorkers(level);
-            comboBox1.DataSource = DATA;
-            comboBox1.DisplayMember = "login";
+            subordinate.DataSource = DATA;
+            subordinate.DisplayMember = "login";
         }
 
-        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        private void addTaskButton_Click(object sender, EventArgs e)
         {
-            if (dateTimePicker1.Value > dateTimePicker2.Value)
+            if (dateTimeAppoint.Value > dateTimeFinish.Value)
             {
                 MessageBox.Show("Дата начала превышает дату окончания");
                 return;
             }
-            if (textBox2.Text == "")
+            if (description.Text == "")
             {
                 MessageBox.Show("Задано пустое описание");
                 return;
             }
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy.MM.dd.HH.mm";
-            dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.CustomFormat = "yyyy.MM.dd.HH.mm";
+            dateTimeAppoint.Format = DateTimePickerFormat.Custom;
+            dateTimeAppoint.CustomFormat = "yyyy.MM.dd.HH.mm";
+            dateTimeFinish.Format = DateTimePickerFormat.Custom;
+            dateTimeFinish.CustomFormat = "yyyy.MM.dd.HH.mm";
 
             Client client = new Client();
-            string answer = client.InsertToTasks(textBox1.Text, dateTimePicker1.Text, dateTimePicker2.Text, textBox2.Text, comboBox1.Text);
+            string query = $"datetimeappointment={Uri.EscapeDataString(dateTimeAppoint.Text)}&datetimefinish={Uri.EscapeDataString(dateTimeFinish.Text)}" +
+                $"&text={Uri.EscapeDataString(description.Text)}&author={Uri.EscapeDataString(author.Text)}&subordinate={Uri.EscapeDataString(subordinate.Text)}";
+            string answer = client.InsertToTasks(query);
             MessageBox.Show(answer);
             Close();
         }

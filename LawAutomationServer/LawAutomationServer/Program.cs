@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net;
-using System.Net.Sockets;
 using System.Data;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using MySql.Data.MySqlClient;
 
 namespace LawAutomationServer
 {
@@ -18,7 +13,8 @@ namespace LawAutomationServer
         {
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add("http://127.0.0.1:8001/");
-            DataTable DATA = new DataTable();
+            WorkWithDB wwdb = new WorkWithDB();
+            DataTable DATA;
             while (true)
             {
                 listener.Start();
@@ -30,20 +26,8 @@ namespace LawAutomationServer
                 string methodName = request.Url.Segments[1].Trim('/');
                 if (methodName == "ReadKB")
                 {
-                    string query = $"SELECT id_question AS 'ID вопроса', question AS 'Вопрос', answer AS 'Ответ', date AS 'Дата'," +
-                    $" (SELECT login FROM users WHERE id_user = id_author) AS 'Автор' FROM knowledgebase";
-                    WorkWithDB wwdb = new WorkWithDB();
-                    DATA = wwdb.ReadFromDB(query);
-
-                    MemoryStream stream = new MemoryStream();
-                    System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, DATA);
-                    byte[] buffer = stream.GetBuffer();
-
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    DATA = wwdb.ReadKBFromDB();
+                    SendData(response, DATA);
                 }
                 else if (methodName == "ReadEvents")
                 {
@@ -65,18 +49,8 @@ namespace LawAutomationServer
                             year = sArg[1];
                         }
                     }
-                    WorkWithDB wwdb = new WorkWithDB();
                     DATA = wwdb.ReadEventsFromDB(day, month, year);
-
-                    MemoryStream stream = new MemoryStream();
-                    System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, DATA);
-                    byte[] buffer = stream.GetBuffer();
-
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendData(response, DATA);
                 }
                 else if (methodName == "ReadTasks")
                 {
@@ -90,18 +64,8 @@ namespace LawAutomationServer
                             name = sArg[1];
                         }
                     }
-                    WorkWithDB wwdb = new WorkWithDB();
                     DATA = wwdb.ReadTasksFromDB(name);
-
-                    MemoryStream stream = new MemoryStream();
-                    System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, DATA);
-                    byte[] buffer = stream.GetBuffer();
-
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendData(response, DATA);
                 }
                 else if (methodName == "ReadMonthEvents")
                 {
@@ -119,18 +83,8 @@ namespace LawAutomationServer
                             year = sArg[1];
                         }
                     }
-                    WorkWithDB wwdb = new WorkWithDB();
                     DATA = wwdb.ReadMonthEventsFromDB(month, year);
-
-                    MemoryStream stream = new MemoryStream();
-                    System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, DATA);
-                    byte[] buffer = stream.GetBuffer();
-
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendData(response, DATA);
                 }
                 else if (methodName == "ReadListOfWorkers")
                 {
@@ -144,22 +98,11 @@ namespace LawAutomationServer
                             level = sArg[1];
                         }
                     }
-                    WorkWithDB wwdb = new WorkWithDB();
                     DATA = wwdb.ReadListOfWorkers(level);
-
-                    MemoryStream stream = new MemoryStream();
-                    System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, DATA);
-                    byte[] buffer = stream.GetBuffer();
-
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendData(response, DATA);
                 }
                 else if (methodName == "InsertToEvents")
                 {
-                    WorkWithDB wwdb = new WorkWithDB();
                     string[] arg = request.Url.Segments[2].Split('&');
                     string datetimestart = "", datetimefinish = "", text = "", level = "", idauthor = "";
                     foreach (string s in arg)
@@ -187,15 +130,10 @@ namespace LawAutomationServer
                         }
                     }
                     string answer = wwdb.WriteEventToDB(datetimestart, datetimefinish, text, level, idauthor);
-                    byte[] buffer = Encoding.UTF8.GetBytes(answer);
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendMessage(response, answer);
                 }
                 else if (methodName == "InsertToTasks")
                 {
-                    WorkWithDB wwdb = new WorkWithDB();
                     string[] arg = request.Url.Segments[2].Split('&');
                     string author = "", datetimeappointment = "", datetimefinish = "", text = "", subordinate = "";
                     foreach (string s in arg)
@@ -223,15 +161,10 @@ namespace LawAutomationServer
                         }
                     }
                     string answer = wwdb.WriteTaskToDB(author, datetimeappointment, datetimefinish, text, subordinate);
-                    byte[] buffer = Encoding.UTF8.GetBytes(answer);
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendMessage(response, answer);
                 }
                 else if (methodName == "UpdateTask")
                 {
-                    WorkWithDB wwdb = new WorkWithDB();
                     string[] arg = request.Url.Segments[2].Split('&');
                     string id = "", process = "";
                     foreach (string s in arg)
@@ -247,15 +180,10 @@ namespace LawAutomationServer
                         }
                     }
                     string answer = wwdb.UpdateTask(id, process);
-                    byte[] buffer = Encoding.UTF8.GetBytes(answer);
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendMessage(response, answer);
                 }
                 else if (methodName == "InsertToRecords")
                 {
-                    WorkWithDB wwdb = new WorkWithDB();
                     string[] arg = request.Url.Segments[2].Split('&');
                     string question = "", answer = "", date = "", author = "";
                     foreach (string s in arg)
@@ -278,12 +206,8 @@ namespace LawAutomationServer
                             author = sArg[1];
                         }
                     }
-                    string ans = wwdb.WriteRecordToDB(question, answer, date, author);
-                    byte[] buffer = Encoding.UTF8.GetBytes(ans);
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    string answr = wwdb.WriteRecordToDB(question, answer, date, author);
+                    SendMessage(response, answr);
                 }
                 else if (methodName == "Authorization")
                 {
@@ -306,19 +230,32 @@ namespace LawAutomationServer
                             password = sArg[1];
                         }
                     }
-                    WorkWithDB wwdb = new WorkWithDB();
                     password = wwdb.GetHashPassword(password);
                     DATA = wwdb.Auth(login, password);
-                    MemoryStream stream = new MemoryStream();
-                    System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, DATA);
-                    byte[] buffer = stream.GetBuffer();
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
+                    SendData(response, DATA);
                 }
             }
+        }
+
+        private static void SendData(HttpListenerResponse response, DataTable DATA)
+        {
+            MemoryStream stream = new MemoryStream();
+            System.Runtime.Serialization.IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, DATA);
+            byte[] buffer = stream.GetBuffer();
+            response.ContentLength64 = buffer.Length;
+            Stream output = response.OutputStream;
+            output.Write(buffer, 0, buffer.Length);
+            output.Close();
+        }
+
+        private static void SendMessage(HttpListenerResponse response, string message)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            response.ContentLength64 = buffer.Length;
+            Stream output = response.OutputStream;
+            output.Write(buffer, 0, buffer.Length);
+            output.Close();
         }
     }
 }

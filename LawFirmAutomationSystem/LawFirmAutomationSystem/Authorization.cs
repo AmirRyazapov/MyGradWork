@@ -18,7 +18,7 @@ namespace LawFirmAutomationSystem
         private void signInButton_Click(object sender, EventArgs e)
         {
             Client client = new Client();
-            DataTable DATA = client.GetHashPassword(login.Text, password.Text);
+            DataTable DATA = client.GetUser(login.Text, password.Text);
             if (DATA == null)
             {
                 return;
